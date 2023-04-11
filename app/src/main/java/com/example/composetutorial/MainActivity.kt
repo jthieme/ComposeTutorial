@@ -38,13 +38,13 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-data class Message(val author : String, val body : String)
+data class Message(val author: String, val body: String, val img: String)
 
 @Composable
-fun MessageCard(msg : Message) {
+fun MessageCard(msg: Message) {
     // Add padding around the image
     Row(modifier = Modifier.padding(all = 8.dp)) {
-        Image(painter = painterResource(R.drawable.ic_launcher_foreground),
+        Image(painter = painterResource(msg.img.toInt()),
             contentDescription = "Contact Profile Picture",
             modifier = Modifier
                 // set image size to 40 dp
@@ -106,7 +106,7 @@ fun PreviewMessageCard() {
     ComposeTutorialTheme {
         Surface {
             MessageCard(
-                msg = Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!")
+                msg = Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!", R.drawable.ic_launcher_foreground.toString())
             )
         }
     }
