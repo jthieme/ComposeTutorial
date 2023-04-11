@@ -12,7 +12,7 @@ object SampleData {
             R.drawable.ic_launcher_foreground.toString()
         ),
         Message(
-            "Colleague",
+            "Friend",
             "List of Android versions:\n" +
                     "Android KitKat (API 19)\n" +
                     "Android Lollipop (API 21)\n" +
@@ -26,13 +26,13 @@ object SampleData {
             R.mipmap.ic_launcher_red_gold.toString()
         ),
         Message(
-            "Colleague",
+            "Friend",
             "I think Kotlin is my favorite programming language.\n" +
                     "It's so much fun!",
             R.mipmap.ic_launcher_red_gold.toString()
         ),
         Message(
-            "Colleague",
+            "Friend",
             "Searching for alternatives to XML layouts...",
             R.mipmap.ic_launcher_red_gold.toString()
         ),
@@ -45,17 +45,17 @@ object SampleData {
             R.drawable.ic_launcher_foreground.toString()
         ),
         Message(
-            "Colleague",
+            "Friend",
             "It's available from API 21+ :)",
             R.mipmap.ic_launcher_red_gold.toString()
         ),
         Message(
-            "Colleague",
+            "Friend",
             "Writing Kotlin for UI seems so natural, Compose where have you been all my life?",
             R.mipmap.ic_launcher_red_gold.toString()
         ),
         Message(
-            "Colleague",
+            "Friend",
             "Android Studio next version's name is Arctic Fox",
             R.mipmap.ic_launcher_red_gold.toString()
         ),
@@ -70,7 +70,7 @@ object SampleData {
             R.drawable.ic_launcher_foreground.toString()
         ),
         Message(
-            "Colleague",
+            "Friend",
             "Compose Previews are great to check quickly how a composable layout looks like",
             R.mipmap.ic_launcher_red_gold.toString()
         ),
@@ -80,7 +80,7 @@ object SampleData {
             R.drawable.ic_launcher_foreground.toString()
         ),
         Message(
-            "Colleague",
+            "Friend",
             "Have you tried writing build.gradle with KTS?",
             R.mipmap.ic_launcher_red_gold.toString()
         ),
