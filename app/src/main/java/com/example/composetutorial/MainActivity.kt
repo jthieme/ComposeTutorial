@@ -4,19 +4,25 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.compose.tutorial.SampleData
 import com.example.composetutorial.ui.theme.ComposeTutorialTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeTutorialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    MessageCard(Message("Android", "Jetpack Compose"))
+                    Conversation(SampleData.conversationSample)
                 }
             }
         }
@@ -52,7 +58,16 @@ fun MessageCard(msg : Message) {
         // add a horizontal space between the image and the column
         Spacer(modifier = Modifier.width(8.dp))
 
-        Column {
+        // Keep track if the message is Expanded or not in this variable
+        var isExpanded by remember { mutableStateOf(false) }
+
+        // surface color will change gradually
+        val surfaceColor by animateColorAsState(
+            if (isExpanded) MaterialTheme.colors.primary else MaterialTheme.colors.surface,
+        )
+
+        // Toggle the isExpanded when we click on this Column
+        Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
             Text(
                 text = msg.author,
                 color = MaterialTheme.colors.secondaryVariant,
@@ -60,10 +75,19 @@ fun MessageCard(msg : Message) {
             )
             // add a vertical space between the author and message
             Spacer(modifier = Modifier.height(4.dp))
-            Surface(shape = MaterialTheme.shapes.medium, elevation = 1.dp) {
+            Surface(
+                shape = MaterialTheme.shapes.medium,
+                elevation = 1.dp,
+                // surface color will change gradually
+                color = surfaceColor,
+                modifier = Modifier.animateContentSize().padding(1.dp)
+            ) {
                 Text(
                     text = msg.body,
                     modifier = Modifier.padding(all = 4.dp),
+                    // If message is expanded, show all of the contents,
+                    // otherwise only show the first line
+                    maxLines = if (isExpanded) Int.MAX_VALUE else 1,
                     style = MaterialTheme.typography.body2
                 )
             }
@@ -77,7 +101,6 @@ fun MessageCard(msg : Message) {
     name = "Dark Mode"
 )
 
-@Preview
 @Composable
 fun PreviewMessageCard() {
     ComposeTutorialTheme {
@@ -86,5 +109,22 @@ fun PreviewMessageCard() {
                 msg = Message("Colleague", "Hey, take a look at Jetpack Compose, it's great!")
             )
         }
+    }
+}
+
+@Composable
+fun Conversation(messages : List<Message>) {
+    LazyColumn {
+        items(messages) { message ->
+            MessageCard(message)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewConversation() {
+    ComposeTutorialTheme {
+        Conversation(SampleData.conversationSample)
     }
 }
