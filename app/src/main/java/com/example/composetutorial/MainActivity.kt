@@ -68,13 +68,7 @@ fun MessageCard(msg: Message) {
 
         // Toggle the isExpanded when we click on this Column
         Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
-            Text(
-                text = msg.author,
-                color = MaterialTheme.colors.secondaryVariant,
-                style = MaterialTheme.typography.subtitle2
-            )
-            // add a vertical space between the author and message
-            Spacer(modifier = Modifier.height(4.dp))
+
             Surface(
                 shape = MaterialTheme.shapes.medium,
                 elevation = 1.dp,
@@ -83,12 +77,20 @@ fun MessageCard(msg: Message) {
                 modifier = Modifier.animateContentSize().padding(1.dp)
             ) {
                 Text(
+                    text = msg.author,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                    color = MaterialTheme.colors.secondaryVariant,
+                    style = MaterialTheme.typography.subtitle2
+                )
+                // add a vertical space between the author and message
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
                     text = msg.body,
-                    modifier = Modifier.padding(all = 4.dp),
+//                    modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 4.dp, bottom = 4.dp),
                     // If message is expanded, show all of the contents,
                     // otherwise only show the first line
                     maxLines = if (isExpanded) Int.MAX_VALUE else 1,
-                    style = MaterialTheme.typography.body2
+                    style = MaterialTheme.typography.body2,
                 )
             }
         }
