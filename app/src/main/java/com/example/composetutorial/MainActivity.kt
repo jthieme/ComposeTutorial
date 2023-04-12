@@ -86,7 +86,7 @@ fun MessageCard(msg: Message) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = msg.body,
-//                    modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 4.dp, bottom = 4.dp),
+                    modifier = Modifier.padding(start = 8.dp, top = 20.dp, end = 4.dp, bottom = 4.dp),
                     // If message is expanded, show all of the contents,
                     // otherwise only show the first line
                     maxLines = if (isExpanded) Int.MAX_VALUE else 1,
